@@ -1,9 +1,8 @@
-import axios from "axios";
+import api from "../api";
 
-const path = "http://localhost:50500/review/api/Users";
 //44366 https
 //44599 http
 
 export const login = async (userData) => {
-  return await axios.post(`${path}/login`, userData);
+  return await api.get(`/login/api/Spitals/${userData.email}/${userData.password}`);
 };

@@ -8,6 +8,8 @@ import { saveUser } from "../redux/userSlice";
 import { saveToken } from "../redux/tokenSlice";
 import { login } from "../services/userService";
 
+import api from '../api';
+
 export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,11 +33,15 @@ export const Login = (props) => {
     console.log(obj);
     login(obj).then((res) => {
       if (res.data) {
-        dispatch(saveToken(res.data));
-        localStorage.setItem("token", JSON.stringify(res.data));
+        const token = JSON.stringify(res.data);
+        dispatch(saveToken(token));
+        localStorage.setItem("token", token);
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
         navigate("/dashboard");
       } else {
         alert("Kredencialet e gabuara");
+        localStorage.removeItem('token');
+        delete api.defaults.headers.common.Authorization;
       }
     });
     // if (email == users.email && password == users.password) {
