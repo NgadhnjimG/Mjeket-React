@@ -1,7 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Nav, Spinner, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
+import api from '../api';
 
 export const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -17,7 +18,7 @@ export const DoctorList = () => {
   }, [doctors]);
 
   const getDoctors = async () => {
-    return await axios.get("http://localhost:50500/spitali/api/Doctors");
+    return await api.get("http://localhost:50500/spitali/api/Doctors");
   };
 
   return (
