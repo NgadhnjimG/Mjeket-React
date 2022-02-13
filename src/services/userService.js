@@ -4,5 +4,5 @@ import api from "../api";
 //44599 http
 
 export const login = async (userData) => {
-  return await api.get(`/login/api/Spitals/${userData.email}/${userData.password}`);
+  return await api.get(`/spitali/api/Spitals/login/${userData.email}/${userData.password}`);
 };
